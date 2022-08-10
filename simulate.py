@@ -13,18 +13,18 @@ from decision import Agent
 
 
 
-UEnet = Agent( alpha=0.0003, beta=0.0003, input_dims=[8],
-                 env=None, gamma=0.99, n_actions=2, max_size=1000000, tau=0.005,
-                 layer1_size=256, layer2_size=256, batch_size=256, reward_scale=2)
+UEnet = Agent( alpha=0.0001, beta=0.0002, input_dims=[8],
+                 env=None, gamma=0.9, n_actions=2, max_size=600000, tau=0.005,
+                 layer1_size=256, layer2_size=256, batch_size=64, reward_scale=2)
 '''原设定参数
  UEnet = Agent(alpha=0.000025, beta=0.00025, input_dims = 8, tau=0.001, \
               env=None, batch_size=64, layer1_size=500, layer2_size=300,
               n_actions=1)
 '''
 env = MECsystem(apply_num, UEnet)
-MECSnet = Agent(alpha=0.0003, beta=0.0003, input_dims = \
+MECSnet = Agent(alpha=0.0001, beta=0.0002, input_dims = \
     (8*apply_num+BS2MECS_rate.size*channel_gain.size+1,),
-              tau=0.005, env=env, max_size=1000000, batch_size=256, layer1_size=256,
+              tau=0.005, env=env, max_size=600000, batch_size=64, layer1_size=256,
               layer2_size=256, n_actions=apply_num*8,reward_scale=2)
 print('8*apply_num+BS2MECS_rate.size*channel_gain.size+1=',8*apply_num+BS2MECS_rate.size*channel_gain.size+1)
 
@@ -43,7 +43,7 @@ list=[]
 
 
 score_history = []
-##原ddpgのsimulate
+##ddpg
 for i in range(10):
     done = False
     score = 0
